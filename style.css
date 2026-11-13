@@ -1,3 +1,30 @@
+/* =========================================================
+   RAKESH SAMBU — PORTFOLIO STYLESHEET
+   Premium black + electric-blue theme
+   Consolidated stylesheet: desktop, mobile and light mode
+   ========================================================= */
+
+/*
+   SECTION 1 — GLOBAL SETTINGS
+   Controls the website-wide color palette, reusable design values,
+   default spacing, box sizing, and smooth scrolling.
+*/
+:root {
+    --bg-main: #05070b;
+    --bg-section: #070a10;
+    --bg-card: #0b1019;
+    --bg-card-soft: #101722;
+    --blue: #00baff;
+    --blue-dark: #007ca8;
+    --blue-glow: rgba(0, 186, 255, 0.18);
+    --text-main: #f8fafc;
+    --text-muted: #a5b4c7;
+    --text-soft: #94a3b8;
+    --border: #172d40;
+    --border-soft: #142536;
+    --radius: 14px;
+    --transition: 0.3s ease;
+}
 
 * {
     margin: 0;
@@ -6,177 +33,290 @@
     scroll-behavior: smooth;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #0b0f19;
-    color: #ffffff;
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 30px;
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-main);
+}
+
+::selection {
+    background: var(--blue);
+    color: #001018;
+}
+
+/*
+   SECTION 2 — TOP NAVIGATION BAR
+   Styles the desktop navigation links, logo, hamburger menu,
+   and dark/light mode button. Mobile layout is adjusted near the bottom.
+*/
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 8%;
-    background: #111827;
+    gap: 24px;
+    padding: 22px 8%;
+    background: var(--bg-main);
+    border-bottom: 1px solid var(--border-soft);
+    position: relative;
+    z-index: 10;
 }
 
 .logo {
     font-size: 28px;
+    font-weight: bold;
+    white-space: nowrap;
 }
 
 .logo span,
 .hero h1 span {
-    color: #38bdf8;
+    color: var(--blue);
 }
 
 .navbar ul {
     display: flex;
-    gap: 30px;
+    align-items: center;
+    gap: 26px;
     list-style: none;
 }
 
 .navbar a {
-    color: #ffffff;
+    color: var(--text-main);
     text-decoration: none;
-    transition: 0.3s;
+    transition: color var(--transition);
 }
 
 .navbar a:hover {
-    color: #38bdf8;
+    color: var(--blue);
 }
 
+.menu-toggle {
+    display: none;
+    background: transparent;
+    color: var(--blue);
+    border: none;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.theme-toggle {
+    padding: 10px 15px;
+    background: transparent;
+    color: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    background: var(--blue);
+    color: #001018;
+}
+
+/*
+   SECTION 3 — HERO / HOME INTRODUCTION
+   Controls the first screen: welcome text, name, animated role text,
+   description, action buttons, and decorative CPU graphic.
+*/
 .hero {
+    position: relative;
+    overflow: hidden;
     min-height: 85vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    padding: 90px 8%;
+    background:
+        radial-gradient(circle at 80% 35%, rgba(0, 186, 255, 0.12), transparent 30%),
+        var(--bg-main);
+}
+
+.hero > * {
+    position: relative;
+    z-index: 1;
+}
+
+.hero::after {
+    content: "CPU";
+    position: absolute;
+    right: 10%;
+    top: 25%;
+    width: 260px;
+    height: 260px;
+    display: flex;
     align-items: center;
-    text-align: center;
-    padding: 40px 20px;
+    justify-content: center;
+    border: 2px solid var(--blue);
+    border-radius: 50%;
+    color: var(--blue);
+    font-size: 55px;
+    font-weight: bold;
+    letter-spacing: 8px;
+    background: radial-gradient(circle, rgba(0, 186, 255, 0.12), transparent 70%);
+    box-shadow: 0 0 25px var(--blue-glow), inset 0 0 30px var(--blue-glow);
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.welcome,
+.section-tag {
+    color: var(--blue);
+    letter-spacing: 3px;
+    font-size: 13px;
+    margin-bottom: 14px;
 }
 
 .welcome {
-    color: #38bdf8;
     letter-spacing: 4px;
     margin-bottom: 20px;
 }
 
 .hero h1 {
-    font-size: clamp(35px, 6vw, 60px);
-    margin-bottom: 15px;
-}
-
-.hero h2 {
-    color: #94a3b8;
+    color: var(--text-main);
+    font-size: clamp(36px, 5vw, 60px);
+    line-height: 1.15;
     margin-bottom: 20px;
 }
 
+.hero h2 {
+    color: var(--text-main);
+    margin-bottom: 22px;
+    font-size: clamp(20px, 2.5vw, 28px);
+}
+
+.hero h2 span {
+    color: var(--blue);
+    border-right: 2px solid var(--blue);
+    padding-right: 5px;
+}
+
 .hero p:not(.welcome) {
-    color: #cbd5e1;
-    max-width: 600px;
-    line-height: 1.8;
+    max-width: 620px;
+    color: var(--text-muted);
+    line-height: 1.9;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .btn {
     display: inline-block;
     margin-top: 30px;
     padding: 14px 28px;
-    background: #38bdf8;
-    color: #0b0f19;
+    background: var(--blue);
+    color: #001018;
     text-decoration: none;
-    border-radius: 6px;
+    border: 1px solid var(--blue);
+    border-radius: 7px;
     font-weight: bold;
-    transition: 0.3s;
+    box-shadow: 0 0 15px rgba(0, 186, 255, 0.15);
+    transition: var(--transition);
 }
 
 .btn:hover {
     background: #ffffff;
+    color: #001018;
+    border-color: #ffffff;
     transform: translateY(-3px);
+    box-shadow: 0 0 25px var(--blue-glow);
 }
 
+.resume-btn {
+    background: transparent;
+    color: var(--blue);
+    border-color: var(--blue);
+}
+
+.resume-btn:hover {
+    background: var(--blue);
+    color: #001018;
+    border-color: var(--blue);
+}
+
+/*
+   SECTION 4 — COMMON SECTION FORMATTING
+   Sets the default spacing, alignment, heading size, and paragraph
+   appearance used by the main page sections.
+*/
 section:not(.hero) {
-    padding: 80px 10%;
+    padding: 85px 8%;
     text-align: center;
-    border-top: 1px solid #1e293b;
+    border-top: 1px solid var(--border-soft);
 }
 
 section h2 {
+    color: var(--text-main);
     font-size: 32px;
+    line-height: 1.25;
     margin-bottom: 25px;
-    color: #38bdf8;
 }
 
 section p {
-    color: #cbd5e1;
+    color: var(--text-muted);
     line-height: 1.8;
 }
 
-footer {
-    padding: 25px;
-    text-align: center;
-    background: #111827;
-    color: #94a3b8;
-}
-
-@media (max-width: 650px) {
-    .navbar {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .navbar ul {
-        gap: 14px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .hero {
-        min-height: 75vh;
-    }
-}
-
-/* ABOUT SECTION */
-
+/*
+   SECTION 5 — ABOUT ME
+   Styles the About section's text column and personal-details card.
+*/
 .about {
-    background: #0f172a;
-}
-
-.section-tag {
-    color: #38bdf8;
-    letter-spacing: 3px;
-    font-size: 13px;
-    margin-bottom: 10px;
+    background: var(--bg-section);
 }
 
 .about-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 50px;
+    gap: 35px;
+    max-width: 1100px;
     text-align: left;
-    margin-top: 40px;
+    margin: 45px auto 0;
+}
+
+.about-text,
+.about-details {
+    background: linear-gradient(145deg, var(--bg-card-soft), #080c13);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 32px;
+    transition: var(--transition);
+}
+
+.about-text:hover,
+.about-details:hover {
+    border-color: var(--blue);
+    box-shadow: 0 10px 35px rgba(0, 186, 255, 0.10);
 }
 
 .about-text h3 {
+    color: var(--blue);
     font-size: 23px;
-    margin-bottom: 20px;
-    color: #ffffff;
+    margin-bottom: 22px;
 }
 
 .about-text p {
-    margin-bottom: 18px;
+    color: var(--text-muted);
     line-height: 1.9;
-}
-
-.about-details {
-    background: #1e293b;
-    padding: 30px;
-    border-radius: 12px;
+    margin-bottom: 18px;
 }
 
 .about-details div {
-    padding: 15px 0;
-    border-bottom: 1px solid #334155;
     color: #cbd5e1;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
 }
 
 .about-details div:last-child {
@@ -184,84 +324,93 @@ footer {
 }
 
 .about-details strong {
-    color: #38bdf8;
+    color: var(--blue);
 }
 
-@media (max-width: 700px) {
-    .about-content {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-}
-
-/* TECHNICAL SKILLS */
-
+/*
+   SECTION 6 — TECHNICAL SKILLS
+   Controls the skills grid, individual skill cards, headings,
+   descriptions, hover border, and hover animation.
+*/
 .skills {
-    background: #0b0f19;
+    background: var(--bg-main);
 }
 
 .skills-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    margin-top: 40px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    max-width: 1150px;
+    margin: 45px auto 0;
 }
 
 .skill-card {
-    background: #111827;
-    padding: 30px;
-    border: 1px solid #1e293b;
-    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, var(--bg-card-soft), #080c13);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 25px;
     text-align: left;
-    transition: 0.3s ease;
+    transition: var(--transition);
 }
 
-.skill-card h3 {
-    color: #38bdf8;
-    font-size: 19px;
-    margin-bottom: 15px;
+.skill-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--blue);
+    transition: width var(--transition);
 }
 
-.skill-card p {
-    color: #94a3b8;
-    line-height: 1.8;
+.skill-card:hover::before {
+    width: 100%;
 }
 
 .skill-card:hover {
     transform: translateY(-8px);
-    border-color: #38bdf8;
-    box-shadow: 0 10px 30px rgba(56, 189, 248, 0.1);
+    border-color: var(--blue);
+    box-shadow: 0 10px 35px rgba(0, 186, 255, 0.12);
 }
 
-@media (max-width: 800px) {
-    .skills-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.skill-card h3 {
+    color: var(--blue);
+    font-size: 19px;
+    margin-bottom: 16px;
 }
 
-@media (max-width: 500px) {
-    .skills-container {
-        grid-template-columns: 1fr;
-    }
+.skill-card p {
+    color: var(--text-muted);
+    line-height: 1.8;
 }
 
-/* WORK EXPERIENCE TIMELINE */
-
+/*
+   SECTION 7 — WORK EXPERIENCE TIMELINE
+   Styles the vertical timeline, timeline dots, date labels,
+   job information cards, and job-description lists.
+*/
 .experience {
-    background: #0f172a;
+    background: var(--bg-section);
 }
 
 .timeline {
-    max-width: 850px;
+    max-width: 900px;
     margin: 50px auto 0;
-    text-align: left;
-    border-left: 2px solid #38bdf8;
     padding-left: 35px;
+    text-align: left;
+    border-left: 2px solid var(--blue);
 }
 
 .timeline-item {
     position: relative;
     margin-bottom: 40px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
 }
 
 .timeline-dot {
@@ -270,82 +419,93 @@ footer {
     top: 5px;
     width: 16px;
     height: 16px;
-    background: #38bdf8;
+    background: var(--blue);
     border-radius: 50%;
-    box-shadow: 0 0 15px #38bdf8;
+    box-shadow: 0 0 18px var(--blue);
 }
 
 .timeline-content {
-    background: #111827;
-    border: 1px solid #1e293b;
-    padding: 30px;
-    border-radius: 12px;
-    transition: 0.3s;
+    background: linear-gradient(145deg, var(--bg-card-soft), #080c13);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 32px;
+    transition: var(--transition);
 }
 
 .timeline-content:hover {
-    border-color: #38bdf8;
+    border-color: var(--blue);
     transform: translateX(6px);
+    box-shadow: 0 10px 35px rgba(0, 186, 255, 0.12);
 }
 
 .timeline-date {
-    color: #38bdf8;
+    color: var(--blue);
     font-size: 14px;
 }
 
 .timeline-content h3 {
-    margin: 15px 0 8px;
+    color: var(--text-main);
     font-size: 23px;
+    margin: 15px 0 8px;
 }
 
 .timeline-content h4 {
-    color: #94a3b8;
+    color: var(--text-muted);
     margin-bottom: 12px;
+}
+
+.timeline-content p,
+.timeline-content ul {
+    color: var(--text-muted);
+    line-height: 1.9;
 }
 
 .timeline-content ul {
     margin: 20px 0 0 20px;
-    color: #cbd5e1;
-    line-height: 2;
 }
 
-/* EDUCATION SECTION */
-
+/*
+   SECTION 8 — EDUCATION
+   Controls the education-card grid, qualification details,
+   study dates, institution text, and current/completed status label.
+*/
 .education {
-    background: #0b0f19;
+    background: var(--bg-main);
 }
 
 .education-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 30px;
     max-width: 950px;
     margin: 40px auto 0;
 }
 
 .education-card {
-    background: #111827;
-    padding: 35px;
-    border: 1px solid #1e293b;
+    background: linear-gradient(145deg, var(--bg-card-soft), #080c13);
+    border: 1px solid rgba(0, 186, 255, 0.35);
+    border-left: 4px solid var(--blue);
     border-radius: 12px;
+    padding: 30px;
     text-align: left;
-    transition: 0.3s ease;
+    transition: var(--transition);
 }
 
 .education-card:hover {
     transform: translateY(-7px);
-    border-color: #38bdf8;
-    box-shadow: 0 10px 30px rgba(56, 189, 248, 0.1);
+    border-color: var(--blue);
+    box-shadow: 0 10px 30px rgba(0, 186, 255, 0.12);
 }
 
 .education-year {
-    color: #38bdf8;
+    color: var(--blue);
     font-size: 14px;
 }
 
 .education-card h3 {
-    font-size: 24px;
-    margin: 20px 0 10px;
+    color: var(--blue);
+    font-size: 22px;
+    margin: 18px 0 10px;
 }
 
 .education-card h4 {
@@ -354,29 +514,28 @@ footer {
 }
 
 .education-card p {
+    color: var(--text-muted);
     margin-bottom: 8px;
 }
 
 .education-status {
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 18px;
     padding: 8px 14px;
-    background: #1e293b;
-    color: #38bdf8;
+    background: #0c2435;
+    color: var(--blue);
+    border: 1px solid #123e59;
     border-radius: 20px;
     font-size: 13px;
 }
 
-@media (max-width: 700px) {
-    .education-container {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* PROJECTS SECTION */
-
+/*
+   SECTION 9 — PROJECTS
+   Styles project cards, featured project, project status badges,
+   technology tags, project descriptions, and project footer details.
+*/
 .projects {
-    background: #0f172a;
+    background: var(--bg-section);
 }
 
 .projects-intro {
@@ -386,31 +545,33 @@ footer {
 
 .projects-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-    max-width: 1100px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    max-width: 1150px;
     margin: 45px auto 0;
     text-align: left;
 }
 
 .project-card {
-    background: #111827;
-    border: 1px solid #263449;
-    border-radius: 14px;
-    padding: 30px;
-    transition: 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, var(--bg-card-soft), #080c13);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    transition: var(--transition);
 }
 
 .project-card:hover {
-    transform: translateY(-7px);
-    border-color: #38bdf8;
-    box-shadow: 0 12px 35px rgba(56, 189, 248, 0.1);
+    transform: translateY(-8px);
+    border-color: var(--blue);
+    box-shadow: 0 12px 40px rgba(0, 186, 255, 0.13);
 }
 
 .featured-project {
     grid-column: 1 / -1;
-    border-color: #2563eb;
-    background: linear-gradient(135deg, #172554, #111827);
+    background: linear-gradient(135deg, #0d1b2a, #070a10);
+    border-color: var(--blue-dark);
 }
 
 .project-top {
@@ -423,7 +584,7 @@ footer {
 }
 
 .project-category {
-    color: #38bdf8;
+    color: var(--blue);
     font-size: 13px;
     font-weight: bold;
 }
@@ -442,14 +603,14 @@ footer {
 }
 
 .project-card h3 {
-    color: #ffffff;
+    color: var(--text-main);
     font-size: 21px;
     line-height: 1.5;
     margin-bottom: 18px;
 }
 
 .project-card p {
-    color: #aebdce;
+    color: var(--text-muted);
     line-height: 1.8;
 }
 
@@ -461,11 +622,18 @@ footer {
 }
 
 .project-tech span {
-    background: #1e293b;
-    color: #38bdf8;
+    background: #0c2435;
+    color: var(--blue);
+    border: 1px solid #123e59;
     padding: 8px 12px;
     border-radius: 6px;
     font-size: 12px;
+    transition: var(--transition);
+}
+
+.project-tech span:hover {
+    background: var(--blue);
+    color: #001018;
 }
 
 .project-footer {
@@ -473,27 +641,20 @@ footer {
     justify-content: space-between;
     gap: 12px;
     flex-wrap: wrap;
-    border-top: 1px solid #334155;
+    border-top: 1px solid var(--border);
     margin-top: 25px;
     padding-top: 18px;
-    color: #94a3b8;
+    color: var(--text-soft);
     font-size: 13px;
 }
 
-@media (max-width: 700px) {
-    .projects-container {
-        grid-template-columns: 1fr;
-    }
-
-    .featured-project {
-        grid-column: auto;
-    }
-}
-
-/* CONTACT SECTION */
-
+/*
+   SECTION 10 — CONTACT
+   Styles the contact introduction and the individual email,
+   LinkedIn, GitHub, or other contact cards.
+*/
 .contact {
-    background: #0b0f19;
+    background: var(--bg-main);
 }
 
 .contact-intro {
@@ -501,216 +662,103 @@ footer {
     margin: 0 auto;
 }
 
+/* CONTACT CARD GRID — preserves the original three-card arrangement */
 .contact-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 25px;
     max-width: 1000px;
     margin: 45px auto 0;
 }
 
 .contact-card {
-    background: #111827;
-    border: 1px solid #263449;
+    background: linear-gradient(145deg, var(--bg-card-soft), #080c13);
+    border: 1px solid var(--border);
     padding: 30px 20px;
     border-radius: 12px;
-    transition: 0.3s;
+    transition: var(--transition);
 }
 
 .contact-card:hover {
     transform: translateY(-7px);
-    border-color: #38bdf8;
+    border-color: var(--blue);
+    box-shadow: 0 10px 30px rgba(0, 186, 255, 0.10);
 }
 
 .contact-card h3 {
-    color: #38bdf8;
+    color: var(--blue);
     margin-bottom: 15px;
 }
 
 .contact-card p {
+    color: var(--text-muted);
     margin-bottom: 20px;
 }
 
-.contact-card a {
-    display: inline-block;
-    color: #38bdf8;
+.contact-card a,
+.contact a {
+    color: var(--blue);
     text-decoration: none;
     font-weight: bold;
+    transition: var(--transition);
 }
 
-.contact-card a:hover {
-    color: white;
-}
-
-@media (max-width: 700px) {
-    .contact-container {
-        grid-template-columns: 1fr;
-    }
-}
-
-footer h3 {
+.contact-card a:hover,
+.contact a:hover {
     color: #ffffff;
+    text-shadow: 0 0 10px var(--blue);
+}
+
+/*
+   SECTION 11 — FOOTER
+   Controls the bottom area of the website, including name/title,
+   tagline, copyright text, and footer links.
+*/
+footer {
+    background: var(--bg-main);
+    border-top: 1px solid rgba(0, 186, 255, 0.3);
+    padding: 25px 15px;
+    text-align: center;
+}
+
+footer h2,
+footer h3 {
+    color: var(--text-main);
     font-size: 24px;
     margin-bottom: 10px;
+    text-shadow: 0 0 12px rgba(0, 186, 255, 0.35);
 }
 
+footer h2 span,
 footer h3 span {
-    color: #38bdf8;
+    color: var(--blue);
 }
 
-/* PROFESSIONAL HERO UPGRADE */
-
-.hero h2 span {
-    color: #38bdf8;
-    border-right: 2px solid #38bdf8;
-    padding-right: 5px;
+footer p {
+    color: var(--text-soft);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
 }
 
-.hero-buttons {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    flex-wrap: wrap;
+footer a {
+    color: var(--blue);
+    text-decoration: none;
 }
 
-.resume-btn {
-    background: transparent;
-    color: #38bdf8;
-    border: 1px solid #38bdf8;
+footer a:hover {
+    text-shadow: 0 0 10px var(--blue);
 }
 
-.resume-btn:hover {
-    background: #38bdf8;
-    color: #0b0f19;
-}
-
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 30px;
-}
-
-::selection {
-    background: #38bdf8;
-    color: #0b0f19;
-}
-/* THEME TOGGLE BUTTON */
-
-.theme-toggle {
-    padding: 10px 15px;
-    background: transparent;
-    color: #38bdf8;
-    border: 1px solid #38bdf8;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 13px;
-    transition: 0.3s;
-}
-
-.theme-toggle:hover {
-    background: #38bdf8;
-    color: #0b0f19;
-}
-/* LIGHT MODE */
-
-body.light-mode {
-    background-color: #f1f5f9;
-    color: #1e293b;
-}
-
-/* Navigation */
-body.light-mode nav {
-    background-color: #ffffff;
-}
-
-body.light-mode nav a {
-    color: #1e293b;
-}
-
-/* Sections */
-body.light-mode section {
-    background-color: #f1f5f9;
-    color: #1e293b;
-}
-
-/* Cards */
-body.light-mode .card,
-body.light-mode .project-card,
-body.light-mode .skill-card {
-    background-color: #ffffff;
-    color: #1e293b;
-    border: 1px solid #cbd5e1;
-}
-
-/* Headings and paragraphs */
-body.light-mode h1,
-body.light-mode h2,
-body.light-mode h3,
-body.light-mode p {
-    color: #1e293b;
-}
-
-/* Footer */
-body.light-mode footer {
-    background-color: #ffffff;
-    color: #1e293b;
-}
-
-/* Theme button */
-body.light-mode .theme-toggle {
-    color: #0369a1;
-    border-color: #0369a1;
-}
-
-body.light-mode .theme-toggle:hover {
-    background-color: #0369a1;
-    color: #ffffff;
-}
-/* MOBILE NAVIGATION */
-
-.menu-toggle {
-    display: none;
-    background: transparent;
-    color: #38bdf8;
-    border: none;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-@media (max-width: 800px) {
-
-    .menu-toggle {
-        display: block;
-    }
-
-    .navbar {
-        position: relative;
-    }
-
-    .navbar ul {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        text-align: center;
-        padding: 20px;
-        background: #111827;
-    }
-
-    .navbar ul.active {
-        display: flex;
-    }
-
-    .navbar {
-        flex-wrap: wrap;
-    }
-}
-
-/* SCROLL ANIMATIONS */
-
+/*
+   SECTION 12 — SCROLL-REVEAL ANIMATION
+   Works with the matching JavaScript: elements with .reveal start
+   hidden and become visible when JavaScript adds .active.
+*/
 .reveal {
     opacity: 0;
     transform: translateY(35px);
-    transition: opacity 0.8s ease,
-                transform 0.8s ease;
+    transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .reveal.active {
@@ -718,44 +766,200 @@ body.light-mode .theme-toggle:hover {
     transform: translateY(0);
 }
 
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-    .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
-    }
+/*
+   SECTION 13 — LIGHT MODE COLORS
+   Overrides the dark theme when JavaScript adds .light-mode to <body>.
+   Keeps text, cards, navigation, sections, buttons, and footer readable.
+*/
+body.light-mode {
+    --bg-main: #f1f5f9;
+    --bg-section: #eaf0f6;
+    --bg-card: #ffffff;
+    --bg-card-soft: #ffffff;
+    --text-main: #172033;
+    --text-muted: #475569;
+    --text-soft: #64748b;
+    --border: #cbd5e1;
+    --border-soft: #d8e1eb;
+    background: var(--bg-main);
+    color: var(--text-main);
 }
 
-/* MOBILE NAVBAR IMPROVEMENT */
+/* LIGHT MODE: navigation bar and navigation links */
+body.light-mode .navbar {
+    background: #ffffff;
+    border-bottom-color: var(--border);
+}
 
+body.light-mode .navbar a {
+    color: #1e293b;
+}
+
+body.light-mode .navbar a:hover {
+    color: #0369a1;
+}
+
+body.light-mode .theme-toggle {
+    color: #0369a1;
+    border-color: #0369a1;
+}
+
+body.light-mode .theme-toggle:hover {
+    background: #0369a1;
+    color: #ffffff;
+}
+
+/* LIGHT MODE: home/hero section */
+body.light-mode .hero {
+    background:
+        radial-gradient(circle at 80% 35%, rgba(0, 120, 200, 0.10), transparent 30%),
+        var(--bg-main);
+}
+
+body.light-mode .hero h1,
+body.light-mode .hero h2,
+body.light-mode section h2 {
+    color: var(--text-main);
+}
+
+body.light-mode .hero p:not(.welcome) {
+    color: var(--text-muted);
+}
+
+body.light-mode .hero::after {
+    opacity: 0.18;
+}
+
+/* LIGHT MODE: section backgrounds */
+body.light-mode .about,
+body.light-mode .experience,
+body.light-mode .projects,
+body.light-mode .skills,
+body.light-mode .education,
+body.light-mode .contact {
+    background: var(--bg-section);
+}
+
+/* LIGHT MODE: content cards and their borders */
+body.light-mode .about-text,
+body.light-mode .about-details,
+body.light-mode .skill-card,
+body.light-mode .timeline-content,
+body.light-mode .education-card,
+body.light-mode .project-card,
+body.light-mode .contact-card {
+    background: #ffffff;
+    border-color: var(--border);
+    box-shadow: none;
+}
+
+/* LIGHT MODE: card headings */
+body.light-mode .about-text h3,
+body.light-mode .skill-card h3,
+body.light-mode .education-card h3,
+body.light-mode .contact-card h3 {
+    color: #0369a1;
+}
+
+/* LIGHT MODE: body copy and supporting text */
+body.light-mode .about-text p,
+body.light-mode .about-details div,
+body.light-mode .skill-card p,
+body.light-mode .timeline-content p,
+body.light-mode .timeline-content ul,
+body.light-mode .education-card p,
+body.light-mode .contact-card p,
+body.light-mode .project-card p {
+    color: var(--text-muted);
+}
+
+body.light-mode .about-details strong,
+body.light-mode .timeline-date,
+body.light-mode .project-category {
+    color: #0369a1;
+}
+
+body.light-mode .timeline-content h3,
+body.light-mode .project-card h3 {
+    color: var(--text-main);
+}
+
+body.light-mode .timeline-content h4,
+body.light-mode .education-card h4 {
+    color: var(--text-muted);
+}
+
+/* LIGHT MODE: technology/status labels */
+body.light-mode .education-status,
+body.light-mode .project-tech span {
+    background: #e0f2fe;
+    color: #0369a1;
+    border-color: #bae6fd;
+}
+
+body.light-mode .featured-project {
+    background: #ffffff;
+    border-color: #93c5fd;
+}
+
+body.light-mode .project-footer {
+    border-top-color: var(--border);
+    color: var(--text-soft);
+}
+
+body.light-mode .contact-card a,
+body.light-mode .contact a,
+body.light-mode .project-card a {
+    color: #0369a1;
+}
+
+/* LIGHT MODE: footer */
+body.light-mode footer {
+    background: #e2e8f0;
+    border-top-color: rgba(0, 120, 200, 0.3);
+}
+
+body.light-mode footer h2,
+body.light-mode footer h3 {
+    color: #111827;
+    text-shadow: none;
+}
+
+body.light-mode footer p {
+    color: #334155;
+}
+
+body.light-mode footer a {
+    color: #0369a1;
+}
+
+/*
+   SECTION 14 — MOBILE / TABLET RESPONSIVENESS
+   Changes navigation, grids, hero alignment, card spacing, and text
+   sizes on smaller screens. The 800px and 500px breakpoints are below.
+*/
+/* TABLET AND MOBILE: navigation and multi-column layouts */
 @media (max-width: 800px) {
-
     .navbar {
-        display: flex;
-        flex-direction: row !important;
+        flex-direction: row;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        padding: 15px 20px;
         gap: 0;
+        padding: 15px 20px;
     }
 
-    /* Hide Rakesh logo on mobile */
     .navbar .logo {
         display: none;
     }
 
-    /* Three-line hamburger */
     .menu-toggle {
         display: block;
         order: 1;
         margin: 0;
         padding: 5px;
-        font-size: 30px;
     }
 
-    /* Light mode on the right */
     .theme-toggle {
         order: 2;
         margin-left: auto;
@@ -763,15 +967,18 @@ body.light-mode .theme-toggle:hover {
         font-size: 13px;
     }
 
-    /* Navigation dropdown */
     .navbar ul {
+        display: none;
         order: 3;
+        flex-direction: column;
+        align-items: center;
         width: 100%;
+        gap: 18px;
         margin-top: 15px;
         padding: 15px;
-        flex-direction: column;
-        gap: 18px;
-        background: #111827;
+        text-align: center;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
         border-radius: 10px;
     }
 
@@ -779,11 +986,235 @@ body.light-mode .theme-toggle:hover {
         display: flex;
     }
 
-    /* Remove unnecessary hero spacing */
     .hero {
-        min-height: 75vh;
-        padding-top: 45px;
+        min-height: auto;
+        padding: 65px 25px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .hero::after {
+        width: 170px;
+        height: 170px;
+        right: -65px;
+        top: 20px;
+        font-size: 30px;
+        opacity: 0.2;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero h2 {
+        font-size: 23px;
+    }
+
+    .hero p:not(.welcome) {
+        font-size: 16px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .skills-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .about-content,
+    .education-container {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-container {
+        grid-template-columns: 1fr;
+    }
+
+    .featured-project {
+        grid-column: auto;
+    }
+
+    .contact-container {
+        grid-template-columns: 1fr;
     }
 }
 
+/* SMALL PHONES: single-column cards and compact spacing */
+@media (max-width: 500px) {
+    section:not(.hero) {
+        padding: 65px 20px;
+    }
 
+    section h2 {
+        font-size: 28px;
+    }
+
+    .skills-container {
+        grid-template-columns: 1fr;
+    }
+
+    .skill-card,
+    .project-card,
+    .timeline-content,
+    .about-text,
+    .about-details,
+    .education-card {
+        padding: 25px 20px;
+    }
+
+    .project-card h3 {
+        font-size: 19px;
+    }
+
+    .timeline {
+        padding-left: 25px;
+    }
+
+    .timeline-dot {
+        left: -34px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .hero-buttons {
+        width: 100%;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/*
+   SECTION 15 — ACCESSIBILITY / REDUCED MOTION
+   Reduces animations for visitors whose device requests less motion.
+*/
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* =========================================
+   SECTION 16 — PREMIUM HOVER ANIMATIONS
+   ========================================= */
+
+/* Common animation for cards */
+.skill-card,
+.project-card,
+.education-card,
+.timeline-content,
+.contact-card,
+.about-text,
+.about-details {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+/* Skills cards */
+.skill-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: #00baff;
+    box-shadow: 0 12px 35px rgba(0, 186, 255, 0.22);
+}
+
+/* Project cards */
+.project-card:hover {
+    transform: translateY(-10px);
+    border-color: #00baff;
+    box-shadow: 0 15px 40px rgba(0, 186, 255, 0.22);
+}
+
+/* Education cards */
+.education-card:hover {
+    transform: translateY(-10px);
+    border-color: #00baff;
+    box-shadow: 0 12px 35px rgba(0, 186, 255, 0.20);
+}
+
+/* Experience cards */
+.timeline-content:hover {
+    transform: translateY(-7px);
+    border-color: #00baff;
+    box-shadow: 0 12px 35px rgba(0, 186, 255, 0.18);
+}
+
+/* Contact cards */
+.contact-card:hover {
+    transform: translateY(-8px);
+    border-color: #00baff;
+    box-shadow: 0 12px 30px rgba(0, 186, 255, 0.18);
+}
+
+/* About cards */
+.about-text:hover,
+.about-details:hover {
+    transform: translateY(-5px);
+    border-color: #00baff;
+    box-shadow: 0 10px 30px rgba(0, 186, 255, 0.15);
+}
+
+/* Technology tags */
+.project-tech span {
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.project-tech span:hover {
+    transform: translateY(-3px);
+}
+
+/* Buttons */
+.btn {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 25px rgba(0, 186, 255, 0.35);
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .skill-card,
+    .project-card,
+    .education-card,
+    .timeline-content,
+    .contact-card,
+    .about-text,
+    .about-details,
+    .project-tech span,
+    .btn {
+        transition: none;
+    }
+
+    .skill-card:hover,
+    .project-card:hover,
+    .education-card:hover,
+    .timeline-content:hover,
+    .contact-card:hover,
+    .about-text:hover,
+    .about-details:hover,
+    .project-tech span:hover,
+    .btn:hover {
+        transform: none;
+    }
+}
